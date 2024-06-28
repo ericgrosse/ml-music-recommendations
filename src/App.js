@@ -5,20 +5,20 @@ const App = () => {
   const [playlistId, setPlaylistId] = useState('');
   const [playlistDetails, setPlaylistDetails] = useState(null);
 
-  useEffect(() => {
-    const fetchPlaylistTracks = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8888/fetch-playlist-tracks?playlist_id=${playlistId}`);
-        setPlaylistDetails(response.data.playlistDetails);
-      } catch (error) {
-        console.error('Error fetching playlist:', error);
-      }
-    };
+  const fetchPlaylistTracks = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8888/fetch-playlist-tracks?playlist_id=${playlistId}`);
+      setPlaylistDetails(response.data.playlistDetails);
+    } catch (error) {
+      console.error('Error fetching playlist:', error);
+    }
+  };
 
+  const handleFetchPlaylist = () => {
     if (playlistId) {
       fetchPlaylistTracks();
     }
-  }, [playlistId]);
+  };
 
   return (
     <div>
@@ -28,7 +28,7 @@ const App = () => {
         value={playlistId}
         onChange={(e) => setPlaylistId(e.target.value)}
       />
-      <button onClick={() => setPlaylistId(playlistId)}>Fetch Playlist</button>
+      <button onClick={handleFetchPlaylist}>Fetch Playlist</button>
 
       {playlistDetails && (
         <div>

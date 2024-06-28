@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const axios = require('axios');
 const querystring = require('querystring');
@@ -5,8 +6,8 @@ const cors = require('cors');
 const app = express();
 const port = 8888;
 
-const clientID = 'YOUR_CLIENT_ID';
-const clientSecret = 'YOUR_CLIENT_SECRET';
+const clientID = process.env.SPOTIFY_CLIENT_ID;
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
 
 app.use(cors());
 
